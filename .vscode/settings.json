@@ -1,0 +1,14 @@
+{
+  "latex-workshop.formatting.latex": "tex-fmt",
+  "latex-workshop.formatting.tex-fmt.args": [],
+  "latex-workshop.latex.autoClean.run": "onSucceeded",
+  "latex-workshop.linting.chktex.enabled": true,
+  "latex-workshop.linting.lacheck.enabled": true,
+  "cSpell.language": "en-GB",
+  "grammarly.selectors": [
+    {
+      "language": "latex",
+      "scheme": "file"
+    }
+  ]
+}

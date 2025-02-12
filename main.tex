@@ -1,0 +1,341 @@
+\documentclass{report}
+
+% For positioning figures (eg. images) with [H]
+\usepackage{float}
+
+% Used for \SI and SI units
+\usepackage{siunitx}
+
+% Fancy tables innit
+\usepackage{booktabs}
+
+% For \abs
+\usepackage{mathtools}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+
+% Swap the definition of \abs* so that it resizes the size of the
+% brackets, and the starred version does not.
+\makeatletter
+\let\oldabs\abs
+\def\abs{\@ifstar{\oldabs}{\oldabs*}}
+\makeatother
+
+% For including graphs via \includegraphics
+\usepackage{graphicx}
+\graphicspath{{assets}}
+
+% Graph shortcuts
+\newcommand{\graph}[2]{
+  \begin{figure}[H]
+    \medskip
+    \centering
+    \includegraphics[width=1\linewidth]{#1}
+    \caption{#2}
+    \medskip\label{fig:#1}
+  \end{figure}
+}
+
+\begin{document}
+
+\section{Raw Data Collection}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{@{}ccccccc@{}}
+    \toprule
+    & \multicolumn{6}{c}{Difference from the length of the cylinder
+    (m)} \\
+    \midrule
+    Frequency (Hz) & T1    & T2    & T3    & T4    & T5    & Average \\
+    256            & 0.331 & 0.334 & 0.333 & 0.336 & 0.335 & 0.3335  \\
+    329            & 0.254 & 0.255 & 0.254 & 0.257 & 0.260 & 0.2550  \\
+    440            & 0.192 & 0.194 & 0.193 & 0.191 & 0.196 & 0.1925  \\
+    523            & 0.162 & 0.166 & 0.163 & 0.166 & 0.164 & 0.1643  \\
+    1700           & 0.055 & 0.045 & 0.045 & 0.047 & 0.044 & 0.0480  \\
+    \bottomrule
+  \end{tabular}
+  \caption{Raw data collected}\label{tab:raw-data}
+  % TODO: should captions be capitalised?
+\end{table}
+
+Table~\ref{tab:raw-data} shows the raw data we collected. Our
+independent variable was
+the frequency of the tuning fork used, and the dependent variable was
+the length of the cylindrical tube that was measured to achieve that
+frequency's fundamental harmonic. Controlled variables were diameter
+of the tube, room temperature and pressure, person that held the
+tube, and person that measured the length of the tube outside the water.
+
+The uncertainty in length of the cylinder is due to having used a
+ruler to measure, and the ruler's smallest measurement is 1
+millimetre. This would usually lead to an uncertainty of 0.5
+millimetres, or 0.0005 metres. However, because the tube and ruler
+weren't being held perfectly still while measuring the length, the
+uncertainty will be kept at 5 millimetres, or 0.005 metres.
+
+The uncertainty in frequency will be treated as zero, because the
+frequency values were written on the tuning forks with unknown
+uncertainty and accuracy.
+
+The average length of the cylinder was calculated as follows:
+
+\[L_{avg}=\frac{L_1+L_2+L_3+L_4+L_5}{5}\]
+
+An example calculation for frequency 256 Hertz:
+
+\[L_{avg}=\frac{0.331+0.334+0.333+0.336+0.335}{5}\]
+\[L_{avg}=\SI{0.3335}{\metre}\]
+
+\section{Determining Length Uncertainty}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{@{}ccccccc@{}}
+    \toprule
+    & \multicolumn{6}{c}{Difference from the length of the cylinder
+    (m)} \\ \midrule
+    Frequency (Hz) & T1        & T2       & T3       & T4       & T5
+    & Average    \\
+    256            & 0.003     & 0.000    & 0.001    & 0.003    &
+    0.002    & 0.0015     \\
+    329            & 0.001     & 0.000    & 0.001    & 0.002    &
+    0.005    & 0.0018     \\
+    440            & 0.001     & 0.001    & 0.001    & 0.002    &
+    0.004    & 0.0015     \\
+    523            & 0.002     & 0.002    & 0.001    & 0.002    &
+    0.000    & 0.0015     \\
+    1700           & 0.007     & 0.003    & 0.003    & 0.001    &
+    0.004    & 0.0036     \\ \bottomrule
+  \end{tabular}
+  \caption{Difference from the mean}\label{tab:diff-from-mean}
+\end{table}
+
+Table~\ref{tab:diff-from-mean} shows the difference from the average
+length of the cylinder
+for each trial. The difference is calculated as follows:
+
+\[d=|L_{avg}-L|\]
+
+For example, the difference for the first trial with frequency 256.0
+Hertz is calculated as follows:
+
+\[d=|0.3335-0.331|\]
+\[d=0.0025=0.003 m\]
+
+Then, the uncertainty for the length is chosen as the highest of the
+average difference from the average and the base uncertainty for
+length. An example calculation for frequency of 256.0 Hertz:
+
+% TODO: is a space required between the ± and the number?
+% Check other occurrences of this in the document (Ctrl+F for pm)
+\[\Delta L=\pm\SI{0.005}{\metre}\]
+
+\section{Frequency vs. Length}\label{sec:freq-vs-length}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{@{}ccc@{}}
+    \toprule
+    Frequency (Hz) & Average length (m) & Uncertainty in average
+    length (m) \\
+    \midrule
+    256 & 0.334 & 0.005 \\
+    329 & 0.255 & 0.005 \\
+    440 & 0.193 & 0.005 \\
+    523 & 0.164 & 0.005 \\
+    1700 & 0.048 & 0.005 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Frequency vs.\ average cylinder length and uncertainty in
+  average cylinder length}\label{tab:freq-vs-length}
+\end{table}
+
+\graph{freq-vs-length}{Frequency vs.\ average cylinder length}
+
+In figure~\ref{fig:freq-vs-length}, there is a clear inversely proportional
+relationship between frequency and length of the cylinder. This can
+also be seen in the equation of the trend line, which is in the form
+of \(y=ax^{-b}\), which can also be rewritten as \(y=\frac{a}{x^b}\).
+
+To make the relationship linear, we can graph the inverse frequency
+vs.\ the length of the cylinder. However, we know that inverse
+frequency in Hertz is the same as period in seconds.
+% TODO: capitalise "Hertz"?
+
+\section{Period vs. Length}
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{@{}ccc@{}}
+    \toprule
+    Period (s) & Average length (m) & Uncertainty in average length (m) \\
+    \midrule
+    0.0039 & 0.334 & 0.005 \\
+    0.0030 & 0.255 & 0.005 \\
+    0.0023 & 0.193 & 0.005 \\
+    0.0019 & 0.164 & 0.005 \\
+    0.0006 & 0.048 & 0.005 \\
+    \bottomrule
+  \end{tabular}
+  \caption{frequency vs.\ average cylinder length and uncertainty in
+  average cylinder length}\label{tab:period-vs-length}
+\end{table}
+
+The period was calculated as follows, where T represents period and f
+represents frequency:
+
+\[T=\frac{1}{f}\]
+
+So, for example, the period for a frequency of 256 Hertz is
+calculated as follows:
+
+\[T=\frac{1}{\SI{256}{\hertz}}=\SI{0.0039}{\second}\]
+
+Period also has no uncertainty because it's calculated in terms of
+frequency, which has no uncertainty.
+
+\graph{period-vs-length}{Period vs.\ length of the cylinder}
+
+Figure~\ref{fig:period-vs-length} shows a graph of period vs.\ length
+of the cylinder. The relationship is linear, as explained in
+part~\ref{sec:freq-vs-length}. The graph supports the theory, as the
+trend line is between all error bars. Furthermore, no points seem to
+be outliers. We can use the best, minimum and maximum slopes of the
+trend lines to calculate our theoretical speed of sound.
+
+\section{Calculating Theoretical Speed of Sound}\label{sec:theoretical-speed}
+
+We are given the equation \(L+e=\frac{v}{4f}\), where \(L\) represents cylinder
+length, \(e\) represents end correction, \(v\) represents the speed of sound,
+and \(f\) represents frequency. If we substitute \(f=\frac{1}{T}\) to get
+an equation for length in terms of period, we get the following:
+
+\[L+e=\frac{vT}{4}\]
+
+If we continue rearranging:
+
+\[L=\frac{vT}{4}-e\]
+\[L=\frac{v}{4}T-e\]
+
+In terms of figure~\ref{fig:period-vs-length}, since \(L\) is our
+y-axis and \(T\) is our x-axis, this equation is now in linear form.
+Therefore, our slope is \(\frac{v}{4}\) and \(-e\) is our
+y-intercept. We can use this to solve for the speed of sound, since
+we know the slopes from the trend lines we get from Excel in
+figure~\ref{fig:period-vs-length}:
+
+\[m=\frac{v}{4}\]
+\[4m=v\]
+\[v=4m\]
+
+We can now plug in our slopes:
+
+\[v_{best}=4\times85.443=\SI{341.772}{\metre\per\second}\]
+\[v_{min}=4\times83.032=\SI{332.128}{\metre\per\second}\]
+\[v_{max}=4\times89.059=\SI{356.236}{\metre\per\second}\]
+
+And to calculate uncertainty in \(v\):
+
+\[\Delta v=\frac{v_{max}-v_{min}}{2}\]
+\[\Delta v=\frac{356.236-332.128}{2}=\SI{12.054}{\metre\per\second}\]
+
+However, uncertainties must be rounded to one significant figure:
+
+\[\Delta v=\pm\SI{10}{\metre\per\second}\]
+
+That would make a final theoretical value for the speed of sound of
+\(\SI{341.772}{\metre\per\second}\pm\SI{10}{\metre\per\second}\).
+However, the value can't have more significant figures than the
+uncertainty, so we get a final theoretical value of
+\(\SI{340}{\metre\per\second}\pm\SI{10}{\metre\per\second}\).
+
+The speed of sound in air according to Wikipedia is
+\SI{343}{\metre\per\second}. Percent error can be calculated as follows:
+
+\[\%~error=\abs{\frac{\mathrm{experimental}-\mathrm{exact}}{\mathrm{exact}}}\]
+\[=\abs{\frac{340-343}{343}}\]
+\[=\SI{8.74}{\percent}=\SI{9}{\percent}\]
+
+\section{Calculating Theoretical End Correction}
+
+As seen from the equation mentioned in
+part~\ref{sec:theoretical-speed}, the y-intercept would give us our
+negative end correction. Since Excel gives us the following equations:
+
+\[y_{best}=85.443x-0.0016\]
+\[y_{min}=83.032x+0.0042\]
+\[y_{max}=89.059b-0.0094\]
+
+Therefore:
+
+\[e_{best}=\SI{0.0016}{\metre}=\SI{1.6}{\milli\metre}\]
+\[e_{min}=\SI{-0.0042}{\metre}=\SI{-4.2}{\milli\metre}\]
+\[e_{max}=\SI{0.0094}{\metre}=\SI{9.4}{\milli\metre}\]
+
+To calculate uncertainty in \(e\):
+
+\[\Delta e=\frac{e_{max}-e_{min}}{2}\]
+\[\Delta e=\frac{0.0094+0.0042}{2}=\SI{0.0068}{\metre}\]
+\[\Delta e=6.8 mm=7 mm\]
+
+Therefore, our final theoretical end correction value is
+\(\SI{2}{\milli\metre}\pm\SI{7}{\milli\metre}\).
+
+According to the report provided on Google Classroom by Mr.\ George,
+end correction can also be calculated as \(e=0.33D\), where \(D\)
+represents the diameter of the cylindrical tube. We recorded this as
+\(D=\SI{25.3}{\milli\metre}\pm\SI{0.1}{\milli\metre}\). The uncertainty
+comes from the calipers used to measure the diameter of the tube. We
+used Mr.\ George's digital calipers, which have a precision of 0.1 millimetres.
+
+Using this measurement of tube diameter, we can calculate our
+expected end correction value:
+
+\[e_{expected}=0.33\times25.3=\SI{8.349}{\milli\metre}\]
+
+And with this, we can calculate our percent error for end correction,
+using the same formula for percent error as used for \(v\):
+
+\[\%~error=\abs{\frac{2-8.349}{8.349}}=\SI{76}{\percent}\]
+
+\section{Evaluation}
+
+For speed of sound, a percent error of \SI{9}{\percent} is
+reasonable. \SI{9}{\percent} of \SI{343}{\metre\per\second} is only
+\SI{3}{\metre\per\second}, which relative to the speed of sound is very low.
+
+For end correction, even though \SI{76}{\percent} error is very high,
+we must keep in mind that it is on a small value---\SI{76}{\percent} of
+our expected value is only about 6.3 millimetres. Therefore, such a
+high percent error is justified.
+
+One possible error that could have affected the accuracy of results
+is the imprecision of the length of the tube measurements. Since the
+tube was held by a human, it wasn't held perfectly still. And
+meanwhile, another human had to hold up a ruler which was also not
+perfectly still to measure the length of this non-still tube. For
+example, looking at table 2, we can see that the measurements for the
+tuning fork of frequency 1700 Hertz were the most imprecise:
+
+\[L_{min}=\SI{0.044}{\metre}=\SI{44}{\milli\metre}\]
+\[L_{max}=\SI{0.055}{\metre}=\SI{55}{\milli\metre}\]
+
+The measurements had a range of 11 millimetres, or 1.1 centimetres.
+That is high imprecision.
+
+Our controlled variables were kept constant for the most part: the
+diameter of the tube was constant as the same tube was used
+throughout the lab. Room temperature and pressure were unlikely to
+change during the approximate 15 minutes that it took us to do the
+experiment, but they were also kept constant via thermostat. The
+person that held the tube (Luis) and the person that measured the
+lengths of the tubes outside the water (Michael) were kept constant
+throughout the lab.
+
+Five trials were chosen to spread out random error in the
+measurements of the lengths of the tubes, as the more trials that are
+done the more accurate average we would get, with a lower
+uncertainty. We chose five trials because they were enough to have a
+low enough uncertainty, and few enough to not take too long to complete.
+
+\end{document}
