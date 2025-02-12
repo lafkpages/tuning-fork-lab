@@ -7,6 +7,7 @@
 \usepackage{siunitx}
 
 % Fancy tables innit
+% https://tablesgenerator.com/latex_tables
 \usepackage{booktabs}
 
 % For \abs
@@ -54,8 +55,7 @@
     1700           & 0.055 & 0.045 & 0.045 & 0.047 & 0.044 & 0.0480  \\
     \bottomrule
   \end{tabular}
-  \caption{Raw data collected}\label{tab:raw-data}
-  % TODO: should captions be capitalised?
+  \caption{raw data collected}\label{tab:raw-data}
 \end{table}
 
 Table~\ref{tab:raw-data} shows the raw data we collected. Our
@@ -107,7 +107,7 @@ An example calculation for frequency 256 Hertz:
     1700           & 0.007     & 0.003    & 0.003    & 0.001    &
     0.004    & 0.0036     \\ \bottomrule
   \end{tabular}
-  \caption{Difference from the mean}\label{tab:diff-from-mean}
+  \caption{difference from the mean}\label{tab:diff-from-mean}
 \end{table}
 
 Table~\ref{tab:diff-from-mean} shows the difference from the average
@@ -146,11 +146,11 @@ length. An example calculation for frequency of 256.0 Hertz:
     1700 & 0.048 & 0.005 \\
     \bottomrule
   \end{tabular}
-  \caption{Frequency vs.\ average cylinder length and uncertainty in
+  \caption{frequency vs.\ average cylinder length and uncertainty in
   average cylinder length}\label{tab:freq-vs-length}
 \end{table}
 
-\graph{freq-vs-length}{Frequency vs.\ average cylinder length}
+\graph{freq-vs-length}{frequency vs.\ average cylinder length}
 
 In figure~\ref{fig:freq-vs-length}, there is a clear inversely proportional
 relationship between frequency and length of the cylinder. This can
@@ -194,7 +194,7 @@ calculated as follows:
 Period also has no uncertainty because it's calculated in terms of
 frequency, which has no uncertainty.
 
-\graph{period-vs-length}{Period vs.\ length of the cylinder}
+\graph{period-vs-length}{period vs.\ length of the cylinder}
 
 Figure~\ref{fig:period-vs-length} shows a graph of period vs.\ length
 of the cylinder. The relationship is linear, as explained in
